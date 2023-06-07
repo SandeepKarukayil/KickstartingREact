@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
@@ -26,6 +26,19 @@ const App = () => {
     },
   ];
 
+  const [EntireData, setEntireData] = useState(expenses);
+
+  const addExpenseHandler = (expense) => {
+    console.log('in App.js');
+    console.log(expense);
+    setEntireData((prev) => {
+      const finalExpense = [expense, ...prev];
+      console.log(finalExpense);
+      return finalExpense;
+    });
+  };
+  console.log(expenses);
+  console.log(EntireData);
   // return React.createElement(
   //   'div',
   //   {},
@@ -35,8 +48,8 @@ const App = () => {
 
   return (
     <div>
-      <NewExpense />
-      <Expenses items={expenses} />
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses items={EntireData} />
     </div>
   );
 };
